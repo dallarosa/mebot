@@ -62,6 +62,54 @@ class Response:
   RPL_NOUSERS = "395"
 
 
+class Messages:
+  PASS = "PASS"
+  NICK = "NICK"
+  USER = "USER"
+  OPER = "OPER"
+  MODE = "MODE"
+  SERVICE = "SERVICE"
+  QUIT = "QUIT"
+  SQUIT = "SQUIT"
+  JOIN = "JOIN"
+  PART = "PART"
+  TOPIC = "TOPIC"
+  NAMES = "NAMES"
+  LIST = "LIST"
+  INVITE = "INVITE"
+  KICK = "KICK"
+  PRIVMSG = "PRIVMSG"
+  NOTICE = "NOTICE"
+  MOTD = "MOTD"
+  LUSERS = "LUSERS"
+  VERSION = "VERSION"
+  STATS = "STATS"
+  LINKS = "LINKS"
+  TIME = "TIME"
+  CONNECT = "CONNECT"
+  TRACE = "TRACE"
+  ADMIN = "ADMIN"
+  INFO = "INFO"
+  SERVLIST = "SERVLIST"
+  SQUERY = "SQUERY"
+  WHO = "WHO"
+  WHOIS = "WHOIS"
+  WHOWAS = "WHOWAS"
+  KILL = "KILL"
+  PING = "PING"
+  PONG = "PONG"
+  ERROR = "ERROR"
+  AWAY = "AWAY"
+  REHASH = "REHASH"
+  DIE = "DIE"
+  RESTART = "RESTART"
+  SUMMON = "SUMMON"
+  USERS = "USERS"
+  WALLOPS = "WALLOPS"
+  USERHOST = "USERHOST"
+  ISON = "ISON"
+
+
 def greeting(sock):
   sock.send("PRIVMSG #nlp hi!\r\n")
 
@@ -76,14 +124,12 @@ while 1:
   readbuffer = temp.pop( )
 
   for line in temp:
-#    print line
     line = string.rstrip(line)
     line = string.split(line)
     if(line[0] == "PING"):
       s.send("PONG %s\r\n" % line[1])
     if(line[1] == Response.RPL_WELCOME):
       print "LOGGED IN"
-      s.send("JOIN #nlp\r\n")
     try:
       if "PRIVMSG" in line and (":Me" in line or ":Me," in line or ":Me:" in line):
         greeting(s)
